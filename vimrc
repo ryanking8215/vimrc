@@ -1,4 +1,5 @@
 " ------ Common -----------"
+syn on
 set t_Co=256
 set nu
 syn on
@@ -60,6 +61,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'godlygeek/tabular'
 Plugin 'matchit.zip'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'nvie/vim-flake8'
 
 "Bundle 'YankRing.vim'
 "Bundle 'jsbeautify'
@@ -92,16 +95,8 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
-" YCM
-"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-"let g:ycm_collect_identifiers_from_tags_files = 1
-"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
 "autocmd FileType c,cpp,javascript set shiftwidth=4 | set expandtab
 
-" markdown
-"au BufRead *.md set ft=mkd
-"let g:vim_markdown_folding_disabled=1
 
 " airline
 let g:airline#extensions#tabline#enabled=1
@@ -208,21 +203,44 @@ if has('conceal')
 	set conceallevel=2 concealcursor=niv
 endif
 
+
+" markdown
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_folding_disabled=1
+
+
+" flake8
+let g:flake8_show_in_gutter=1
+let g:flake8_show_in_file=1
+
+let flake8_error_marker='EE'     
+let flake8_warning_marker='WW'   
+let flake8_pyflake_marker=''     
+let flake8_complexity_marker=''  
+let flake8_naming_marker=''      
+
+highlight link Flake8_Error      Error
+highlight link Flake8_Warning    WarningMsg
+highlight link Flake8_Complexity WarningMsg
+highlight link Flake8_Naming     WarningMsg
+highlight link Flake8_PyFlake    WarningMsg
+
 " ----------- 各种组件设置 end ------------
 
 " 各种文件设置
 au BufNewFile,BufRead *.py
-			\ set tabstop=4 |
-			\ set softtabstop=4 |
-			\ set shiftwidth=4 |
-			\ set textwidth=79 |
-			\ set expandtab |
-			\ set autoindent |
+			\ setlocal tabstop=4 |
+			\ setlocal softtabstop=4 |
+			\ setlocal shiftwidth=4 |
+			\ setlocal textwidth=79 |
+			\ setlocal expandtab |
+			\ setlocal autoindent |
+			\ map <buffer> <leader>pf :call Flake8()<CR> |
 
 au BufNewFile,BufRead *.js, *.html, *.css
-			\ set tabstop=2 |
-			\ set softtabstop=2 |
-			\ set shiftwidth=2 |
+			\ setlocal tabstop=2 |
+			\ setlocal softtabstop=2 |
+			\ setlocal shiftwidth=2 |
 
 " 标注错误的whitespace
 " au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/

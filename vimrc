@@ -64,6 +64,8 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'nvie/vim-flake8'
 Plugin 'tpope/vim-fugitive'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'rking/ag.vim'
 
 "Bundle 'YankRing.vim'
 "Bundle 'jsbeautify'
@@ -284,7 +286,10 @@ nmap <silent> <leader>th :nohlsearch<CR>
 
 nmap <silent> <leader>sh :shell<CR>
 nmap <leader>dv :vertical diffsplit<space>
-nmap <leader>ss :grep<space>
+
+" search
+nmap <leader>ss :CtrlSF<space>
+nmap <leader>sa :Ag<space>
 
 " make
 nmap <silent> <leader>mm :make<CR>

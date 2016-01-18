@@ -1,4 +1,6 @@
-" ------ Common -----------"
+" vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
+"
+" Basic {
 syn on
 set t_Co=256
 set nu
@@ -16,7 +18,7 @@ set cursorline
 set ts=4
 set shiftwidth=4
 set softtabstop=4
-set cc=81
+"set cc=81
 let mapleader = ','
 " working is OS X
 set clipboard=unnamed
@@ -28,11 +30,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" -------- Common end ----------"
+" }
 
-
-
-" ------ Vundle -----------"
+" Vundle {
 set nocompatible               " be iMproved
 filetype off                   " required!
 
@@ -63,10 +63,10 @@ Plugin 'matchit.zip'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'nvie/vim-flake8'
+Plugin 'tpope/vim-fugitive'
 
 "Bundle 'YankRing.vim'
 "Bundle 'jsbeautify'
-"Bundle 'tpope/vim-fugitive'
 "Bundle 'vimwiki'
 "Bundle 'jnwhiteh/vim-golang'
 "Bundle 'Valloric/YouCompleteMe'
@@ -80,28 +80,44 @@ Plugin 'nvie/vim-flake8'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on     "required!
-" ------------ Vundle end -----------
+" }
 
-
-" --------- theme -----------
+" Theme {
 color lucius
 LuciusDark
-" --------- theme end --------
+" }
 
-
-" ----------- 各种组件设置 ------------
-" ctrlp
+" 各种组件设置 {
+" ctrlp {
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+" }
 
-"autocmd FileType c,cpp,javascript set shiftwidth=4 | set expandtab
+" airline {
+let g:airline#extensions#tabline#enabled=0
+"let g:airline_powerline_fonts=1
+"let g:Powerline_symbols = 'fancy'
+"let Powerline_symbols='compatible'
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+"" unicode symbols
+"let g:airline_left_sep = '>'
+let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '<'
+let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+" }
 
-
-" airline
-let g:airline#extensions#tabline#enabled=1
-
-" neocomplete
+" neocomplete {
 " Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -176,15 +192,15 @@ let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:]*\t]\%(\.\|->\)'
 let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:]*\t]\%(\.\|->\)\|\h\w*::'
 "let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 let g:neocomplete#sources#omni#input_patterns.python = '\%([^. \t]\.\|^\s*@\)\w*'
+" }
 
-
-" jedi-vim
+" jedi-vim {
 let g:jedi#popup_select_first=0
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#popup_on_dot = 0
+" }
 
-
-" neosnippet
+" neosnippet {
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -202,32 +218,33 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
 	set conceallevel=2 concealcursor=niv
 endif
+" }
 
-
-" markdown
+" markdown {
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_folding_disabled=1
+" }
 
-
-" flake8
+" flake8 {
 let g:flake8_show_in_gutter=1
 let g:flake8_show_in_file=1
 
-let flake8_error_marker='EE'     
-let flake8_warning_marker='WW'   
-let flake8_pyflake_marker=''     
-let flake8_complexity_marker=''  
-let flake8_naming_marker=''      
+let flake8_error_marker='EE'
+let flake8_warning_marker='WW'
+let flake8_pyflake_marker=''
+let flake8_complexity_marker=''
+let flake8_naming_marker=''
 
 highlight link Flake8_Error      Error
 highlight link Flake8_Warning    WarningMsg
 highlight link Flake8_Complexity WarningMsg
 highlight link Flake8_Naming     WarningMsg
 highlight link Flake8_PyFlake    WarningMsg
+" }
 
-" ----------- 各种组件设置 end ------------
+" }
 
-" 各种文件设置
+" 各种文件设置 {
 au BufNewFile,BufRead *.py
 			\ setlocal tabstop=4 |
 			\ setlocal softtabstop=4 |
@@ -237,6 +254,12 @@ au BufNewFile,BufRead *.py
 			\ setlocal autoindent |
 			\ map <buffer> <leader>pf :call Flake8()<CR> |
 
+au FileType c,cpp
+			\ setlocal tabstop=4 |
+			\ setlocal softtabstop=4 |
+			\ setlocal shiftwidth=4 |
+			\ setlocal expandtab |
+
 au BufNewFile,BufRead *.js, *.html, *.css
 			\ setlocal tabstop=2 |
 			\ setlocal softtabstop=2 |
@@ -244,19 +267,34 @@ au BufNewFile,BufRead *.js, *.html, *.css
 
 " 标注错误的whitespace
 " au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" }
 
-
-" ----------- Key -------------
+" Shortkey {
 nmap 0 ^
 nmap Y y$
+" window
 nnoremap <silent> <leader>ww <C-W><C-W>
+nmap <silent> <leader>ws :sv<CR>
+nmap <silent> <leader>wv :vs<CR>
+
 nmap <silent> <leader>ft :NERDTreeToggle<CR>
 nmap <silent> <leader>tt :TagbarToggle<CR>
 nmap <silent> <leader>tc :cope<CR>
 nmap <silent> <leader>th :nohlsearch<CR>
-nmap <silent> <leader>' :shell<CR>
+
+nmap <silent> <leader>sh :shell<CR>
 nmap <leader>dv :vertical diffsplit<space>
-nmap <leader>c :make<space>
 nmap <leader>ss :grep<space>
-" ----------- Key end -------------
+
+" make
+nmap <silent> <leader>mm :make<CR>
+nmap <silent> <leader>mc :make clean<CR>
+nmap <leader>mi :make install<CR>
+nmap <leader>mf :make -f<space>
+
+" git
+nmap <silent> <leader>gs :Gstatus<CR>
+nmap <leader>gg :Git<space>
+
+" } 
 

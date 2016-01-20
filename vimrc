@@ -21,7 +21,8 @@ set softtabstop=4
 "set cc=81
 let mapleader = ','
 " working is OS X
-set clipboard=unnamed
+set clipboard=unnamedplus
+set nocompatible               " be iMproved
 
 " window
 set splitbelow
@@ -32,40 +33,33 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 " }
 
-" Vundle {
-set nocompatible               " be iMproved
-filetype off                   " required!
+" Plugin {
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-
-" let Vundle manage Vundle
-" required!
-Plugin 'VundleVim/Vundle.vim'
-
-" Plugin List
-Plugin 'vim-airline/vim-airline'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'majutsushi/tagbar'
-Plugin 'mbbill/undotree'
-Plugin 'jonathanfilip/vim-lucius'
-Plugin 'kien/ctrlp.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'tpope/vim-surround'
-Plugin 'godlygeek/tabular'
-Plugin 'matchit.zip'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'nvie/vim-flake8'
-Plugin 'tpope/vim-fugitive'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'rking/ag.vim'
+" Plug List
+Plug 'vim-airline/vim-airline'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'kien/ctrlp.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'davidhalter/jedi-vim'
+Plug 'tpope/vim-surround'
+Plug 'godlygeek/tabular'
+Plug 'matchit.zip'
+Plug 'jiangmiao/auto-pairs'
+Plug 'plasticboy/vim-markdown'
+Plug 'nvie/vim-flake8'
+Plug 'tpope/vim-fugitive'
+Plug 'dyng/ctrlsf.vim'
+Plug 'rking/ag.vim'
+Plug 'tomtom/tcomment_vim'
 
 "Bundle 'YankRing.vim'
 "Bundle 'jsbeautify'
@@ -79,9 +73,7 @@ Plugin 'rking/ag.vim'
 "Bundle 'vimplugin/project.vim'
 "Bundle 'nathanaelkane/vim-indent-guides'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on     "required!
+call plug#end()            " required
 " }
 
 " Theme {
